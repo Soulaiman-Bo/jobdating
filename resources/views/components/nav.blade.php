@@ -1,10 +1,10 @@
-<nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200 dark:bg-gray-800 dark:border-gray-700">
+<nav class="fixed top-0 z-50 w-full bg-white border-b border-gray-200">
     <div class="px-3 py-3 lg:px-5 lg:pl-3">
         <div class="flex items-center justify-between">
             <div class="flex items-center justify-start rtl:justify-end">
                 <button data-drawer-target="logo-sidebar" data-drawer-toggle="logo-sidebar" aria-controls="logo-sidebar"
                     type="button"
-                    class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
+                    class="inline-flex items-center p-2 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200">
                     <span class="sr-only">Open sidebar</span>
                     <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20"
                         xmlns="http://www.w3.org/2000/svg">
@@ -22,7 +22,7 @@
                 <div class="flex items-center ms-3">
                     <div>
                         <button id="userMenu" type="button"
-                            class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600"
+                            class="flex text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300"
                             id="user-menu-button" aria-expanded="false" data-dropdown-toggle="user-dropdown"
                             data-dropdown-placement="bottom">
                             <span class="sr-only">Open user menu</span>
@@ -32,28 +32,28 @@
                     </div>
 
                     <div id="userDropdown"
-                        class="z-50 hidden absolute translate-y-28 translate-x-[-8rem] my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600"
+                        class="z-50 hidden absolute translate-y-28 translate-x-[-8rem] my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow"
                         id="user-dropdown">
                         <div class="px-4 py-3">
-                            <span class="block text-sm text-gray-900 dark:text-white"> Soulaiman
+                            <span class="block text-sm text-gray-900"> Soulaiman
                                 Bouhlal </span>
                             <span
-                                class="block text-sm  text-gray-500 truncate dark:text-gray-400">soulaima@email.com</span>
+                                class="block text-sm  text-gray-500 truncate">soulaima@email.com</span>
                         </div>
                         <ul class="py-2" aria-labelledby="user-menu-button">
                             <li>
                                 <a href="/"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Home</a>
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Home</a>
                             </li>
                             <li>
                                 <a href="/dashboard"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Dashboard</a>
                             </li>
 
 
                             <li>
                                 <a href="/api/logout"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign
+                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sign
                                     out</a>
                             </li>
                         </ul>

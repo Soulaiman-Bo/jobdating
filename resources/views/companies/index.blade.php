@@ -1,6 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
+
+    <x-logout-component />
+
     <div>
         @if (session()->has('success'))
             <div>
@@ -11,8 +14,7 @@
     <div class="overflow-x-auto  rounded-2xl">
         <div class="inline-block min-w-full align-middle">
 
-            <div
-                class="items-center gap-5 p-9 mb-9 shadow-lg dark:bg-slate-850 dark:shadow-dark-xl relative rounded-2xl bg-white bg-clip-border">
+            <div class="items-center gap-5 p-9 mb-9 shadow-lg relative rounded-2xl bg-white bg-clip-border">
                 <div class="flex gap-6  items-center">
                     <a href="/company/create"
                         class="inline-flex items-center  w-fit py-3 px-4 text-sm font-medium text-center text-white bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg shadow-md shadow-gray-300 hover:scale-[1.02] transition-transform">

@@ -50,6 +50,7 @@ class CompanyController extends Controller
             'sector' => 'nullable',
             'location' => 'nullable'
         ]);
+        
         $company->update($validatedData);
 
         session()->flash('success', 'Company updated successfully!');

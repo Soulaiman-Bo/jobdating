@@ -3,10 +3,10 @@
 @section('content')
     <div class="w-full max-w-full px-3 shrink-0 md:flex-0">
         <div
-            class="relative flex flex-col min-w-0 break-words bg-white border-0 shadow-xl dark:bg-slate-850 dark:shadow-dark-xl rounded-2xl bg-clip-border">
+            class="relative flex flex-col min-w-0 break-words bg-white border-0 shadow-xl rounded-2xl bg-clip-border">
             <div class="border-black/12.5 rounded-t-2xl border-b-0 border-solid p-6 pb-0">
                 <div class="flex items-center">
-                    <p class="mb-0 dark:text-white/80">Create Company</p>
+                    <p class="mb-0">Create Company</p>
                 </div>
             </div>
 
@@ -16,9 +16,9 @@
                     <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
                         <div class="mb-4">
                             <label for="title"
-                                class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">Name</label>
+                                class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700">Name</label>
                             <input type="text" id="name" name="name"
-                                class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
+                                class="focus:shadow-primary-outline text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
                             <span id="nameError" class="ml-2 text-red-500"></span>
                         </div>
                     </div>
@@ -26,9 +26,9 @@
                     <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
                         <div class="mb-4">
                             <label for="title"
-                                class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">Description</label>
+                                class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700">Description</label>
                             <input type="text" id="description" name="description"
-                                class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
+                                class="focus:shadow-primary-outline text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
                             <span id="descriptionError" class="ml-2 text-red-500"></span>
                         </div>
                     </div>
@@ -36,10 +36,10 @@
                     <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
                         <div class="mb-4">
                             <label for="header_img"
-                                class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">Header
+                                class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700">Header
                                 logo</label>
                             <input type="text" id="logo" name="logo"
-                                class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
+                                class="focus:shadow-primary-outline text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
                             <span id="logoError" class="ml-2 text-red-500"></span>
                         </div>
                     </div>
@@ -47,10 +47,10 @@
                     <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
                         <div class="mb-4">
                             <label for="header_img"
-                                class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">Sector
+                                class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700">Sector
                                 sector</label>
                             <input type="text" id="sector" name="sector"
-                                class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
+                                class="focus:shadow-primary-outline text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
                             <span id="sectorError" class="ml-2 text-red-500"></span>
                         </div>
                     </div>
@@ -58,10 +58,10 @@
                     <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
                         <div class="mb-4">
                             <label for="header_img"
-                                class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">Location
+                                class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700">Location
                                 location</label>
                             <input type="text" id="location" name="location"
-                                class="focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
+                                class="focus:shadow-primary-outline text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
                             <span id="locationError" class="ml-2 text-red-500"></span>
                         </div>
                     </div>
@@ -69,15 +69,15 @@
                 </div>
 
                 {{-- <hr
-                    class="h-px mx-0 my-4 bg-transparent border-0 opacity-25 bg-gradient-to-r from-transparent via-black/40 to-transparent dark:bg-gradient-to-r dark:from-transparent dark:via-white dark:to-transparent" />
+                    class="h-px mx-0 my-4 bg-transparent border-0 opacity-25 bg-gradient-to-r from-transparent via-black/40 to-transparent" />
 
                 <div class="flex flex-wrap -mx-3">
                     <div class="w-full max-w-full px-3 shrink-0 md:w-full md:flex-0">
                         <div class="mb-4">
                             <label for="description"
-                                class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700 dark:text-white/80">Description</label>
+                                class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700">Description</label>
                             <textarea id="description" name="description" rows="5" placeholder="summary for this article"
-                                class="noteditor focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none"></textarea>
+                                class="noteditor focus:shadow-primary-outline text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none"></textarea>
                             <span id="descriptionError" class="ml-2 text-red-500"></span>
                         </div>
                     </div>
