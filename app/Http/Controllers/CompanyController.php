@@ -22,9 +22,17 @@ class CompanyController extends Controller
 
     public function store(StoreCompanyRequest $req)
     {
-
         if ($req->validated()) {
-            $company = Company::create($req->validated());
+            $imagePath = $req->file('logo')->store('public/images');  // Store image in 'public/images' directory
+
+            $company = Company::create([
+                'name' => $req->input('name'),
+                'description' => $req->input('description'),
+                'sector' => $req->input('sector'),
+                'location' => $req->input('location'),
+                'logo' => $imagePath,
+            ]);
+
             return redirect()->route('company.index')->with("success", 'Inserted Successfully');
         } else {
             return redirect()->back()->withInput()->withErrors($req->errors());
@@ -41,6 +49,7 @@ class CompanyController extends Controller
     {
 
         if ($request->validated()) {
+
             $company->update($request->validated());
             session()->flash('success', 'Company updated successfully!');
             return redirect()->route('company.index', $company->id);
@@ -56,6 +65,4 @@ class CompanyController extends Controller
         session()->flash('success', 'Company deleted successfully!');
         return redirect()->route('company.index');
     }
-
-    
 }
