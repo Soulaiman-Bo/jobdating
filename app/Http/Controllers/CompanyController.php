@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreCompanyRequest;
 use App\Models\Company;
 use Exception;
 use Illuminate\Http\Request;
@@ -19,19 +20,15 @@ class CompanyController extends Controller
         return view('companies.create');
     }
 
-    public function store(Request $req)
+    public function store(StoreCompanyRequest $req)
     {
-        $data = $req->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'logo' => 'required',
-            'sector' => 'nullable',
-            'location' => 'nullable'
-        ]);
 
-        $company = Company::create($data);
-
-        return redirect()->route('company.index')->with("success", 'Inserted Successfully');
+        if ($req->validated()) {
+            $company = Company::create($req->validated());
+            return redirect()->route('company.index')->with("success", 'Inserted Successfully');
+        } else {
+            return redirect()->back()->withInput()->withErrors($req->errors());
+        }
     }
 
     public function edit(Request $req, $id)
@@ -40,30 +37,25 @@ class CompanyController extends Controller
         return view('companies.edit', compact('company'));
     }
 
-    public function update(Request $request, Company $company)
+    public function update(StoreCompanyRequest $request, Company $company)
     {
 
-        $validatedData = $request->validate([
-            'name' => 'required',
-            'description' => 'required',
-            'logo' => 'required',
-            'sector' => 'nullable',
-            'location' => 'nullable'
-        ]);
-        
-        $company->update($validatedData);
-
-        session()->flash('success', 'Company updated successfully!');
-
-        return redirect()->route('company.index', $company->id);
+        if ($request->validated()) {
+            $company->update($request->validated());
+            session()->flash('success', 'Company updated successfully!');
+            return redirect()->route('company.index', $company->id);
+        } else {
+            return redirect()->back()->withInput()->withErrors($request->errors());
+        }
     }
+
 
     public function destroy(Company $company)
     {
         $company->delete();
         session()->flash('success', 'Company deleted successfully!');
         return redirect()->route('company.index');
-
-
     }
+
+    
 }
