@@ -1,13 +1,14 @@
 @extends('layouts.app')
 
 @section('content')
-
-    <x-logout-component />
+    {{-- <x-logout-component /> --}}
 
     <div>
         @if (session()->has('success'))
-            <div>
-                {{ session('success') }}
+            <div id="successAlert"
+                class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+                role="alert">
+                <span class="font-medium"> {{ session('success') }}</span>
             </div>
         @endif
     </div>
@@ -129,4 +130,14 @@
 
         </div>
     </div>
+
+    <script>
+        let successAlert = document.getElementById("successAlert");
+
+        if (successAlert) {
+            setTimeout(() => {
+                successAlert.classList.add("hidden");
+            }, 3000);
+        }
+    </script>
 @endsection

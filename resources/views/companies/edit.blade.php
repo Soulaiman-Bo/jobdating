@@ -2,8 +2,7 @@
 
 @section('content')
     <div class="w-full max-w-full px-3 shrink-0 md:flex-0">
-        <div
-            class="relative flex flex-col min-w-0 break-words bg-white border-0 shadow-xl rounded-2xl bg-clip-border">
+        <div class="relative flex flex-col min-w-0 break-words bg-white border-0 shadow-xl rounded-2xl bg-clip-border">
             <div class="border-black/12.5 rounded-t-2xl border-b-0 border-solid p-6 pb-0">
                 <div class="flex items-center">
                     <p class="mb-0">Create Company</p>
@@ -22,7 +21,9 @@
                                 class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700">Name</label>
                             <input type="text" id="name" name="name" value=" {{ $company->name }}"
                                 class="focus:shadow-primary-outline text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
-                            <span id="nameError" class="ml-2 text-red-500"></span>
+                            @if ($errors->has('name'))
+                                <span id="nameError" class="ml-2 text-red-500">{{ $errors->first('name') }}</span>
+                            @endif
                         </div>
                     </div>
 
@@ -32,40 +33,45 @@
                                 class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700">Description</label>
                             <input type="text" id="description" name="description" value=" {{ $company->description }}"
                                 class="focus:shadow-primary-outline text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
-                            <span id="descriptionError" class="ml-2 text-red-500"></span>
+                            @if ($errors->has('description'))
+                                <span id="nameError" class="ml-2 text-red-500">{{ $errors->first('description') }}</span>
+                            @endif
                         </div>
                     </div>
 
                     <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
                         <div class="mb-4">
-                            <label for="header_img"
-                                class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700">Header
+                            <label for="header_img" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700">Header
                                 logo</label>
-                            <input type="text" id="logo" name="logo"  value=" {{ $company->logo }}"
+                            <input type="text" id="logo" name="logo" value=" {{ $company->logo }}"
                                 class="focus:shadow-primary-outline text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
-                            <span id="logoError" class="ml-2 text-red-500"></span>
+                            @if ($errors->has('logo'))
+                                <span id="nameError" class="ml-2 text-red-500">{{ $errors->first('logo') }}</span>
+                            @endif
                         </div>
                     </div>
 
                     <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
                         <div class="mb-4">
-                            <label for="header_img"
-                                class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700">Sector
+                            <label for="header_img" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700">Sector
                                 sector</label>
-                            <input type="text" id="sector" name="sector"  value=" {{ $company->sector }}"
+                            <input type="text" id="sector" name="sector" value="{{ $company->sector }}"
                                 class="focus:shadow-primary-outline text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
-                            <span id="sectorError" class="ml-2 text-red-500"></span>
+                            @if ($errors->has('sector'))
+                                <span id="nameError" class="ml-2 text-red-500">{{ $errors->first('sector') }}</span>
+                            @endif
                         </div>
                     </div>
 
                     <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
                         <div class="mb-4">
-                            <label for="header_img"
-                                class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700">Location
+                            <label for="header_img" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700">Location
                                 location</label>
-                            <input type="text" id="location" name="location"  value=" {{ $company->location }}"
+                            <input type="text" id="location" name="location" value=" {{ $company->location }}"
                                 class="focus:shadow-primary-outline text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
-                            <span id="locationError" class="ml-2 text-red-500"></span>
+                            @if ($errors->has('location'))
+                                <span id="nameError" class="ml-2 text-red-500">{{ $errors->first('location') }}</span>
+                            @endif
                         </div>
                     </div>
 
