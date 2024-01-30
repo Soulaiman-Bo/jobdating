@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreCompanyRequest extends FormRequest
+class EditCompanyRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -19,16 +19,18 @@ class StoreCompanyRequest extends FormRequest
      *
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
+
     public function rules(): array
     {
         return [
             'name' => 'required|max:255|min:3|string',
             'description' => 'required|max:255|min:3',
-            'logo' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'sector' => 'required|max:255|min:3',
             'location' => 'required|max:255|min:3'
         ];
     }
+
 
     public function messages()
     {
@@ -42,9 +44,8 @@ class StoreCompanyRequest extends FormRequest
             'description.max' => 'The description field must not exceed 255 characters.',
             'description.min' => 'The description must be at least 3 characters long.',
 
-            'logo.required' => 'The logo field is required.',
             'logo.max' => 'The logo field must not exceed 2048 bytes.',
-            'logo.image' => 'The logo must be an Image.',
+            'logo.image' => 'The logo must be an Imageeee.',
             'logo.mimes' => 'The logo must be one of these formates: jpeg,png,jpg,gif,svg.',
 
             'sector.required' => 'The sector field is required.',

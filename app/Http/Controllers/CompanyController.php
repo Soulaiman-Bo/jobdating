@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EditCompanyRequest;
 use App\Http\Requests\StoreCompanyRequest;
 use App\Models\Company;
 use Exception;
@@ -41,18 +42,25 @@ class CompanyController extends Controller
 
     public function edit(Request $req, $id)
     {
+
         $company = Company::findOrFail($id);
         return view('companies.edit', compact('company'));
     }
 
-    public function update(StoreCompanyRequest $request, Company $company)
+    public function update(EditCompanyRequest $request, Company $company)
     {
 
         if ($request->validated()) {
+            if ($request->hasFile('logo')) {
+                $imagePath = $request->file('logo')->store('public/images'); 
+                $company->image = $imagePath;
+            }
 
-            $company->update($request->validated());
+            $company->update($request->all());
+
             session()->flash('success', 'Company updated successfully!');
             return redirect()->route('company.index', $company->id);
+
         } else {
             return redirect()->back()->withInput()->withErrors($request->errors());
         }
