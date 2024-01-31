@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Announcement;
 use App\Http\Requests\StoreAnnouncementRequest;
 use App\Http\Requests\UpdateAnnouncementRequest;
+use App\Models\Company;
+use Illuminate\Http\Request;
 
 class AnnouncementController extends Controller
 {
@@ -13,7 +15,8 @@ class AnnouncementController extends Controller
      */
     public function index()
     {
-        //
+        $announcements = Announcement::all();
+        return view('announcements.index', ['announcements' => $announcements]);
     }
 
     /**
@@ -21,7 +24,8 @@ class AnnouncementController extends Controller
      */
     public function create()
     {
-        //
+        $companies = Company::all();
+        return view('announcements.create', ['companies' => $companies]);
     }
 
     /**
@@ -29,7 +33,20 @@ class AnnouncementController extends Controller
      */
     public function store(StoreAnnouncementRequest $request)
     {
-        //
+        if ($request->validated()) {
+            $imagePath = $request->file('image')->store('public/images');
+
+            $company = Announcement::create([
+                'title' => $request->input('title'),
+                'company_id' => $request->input('company_id'),
+                'description' => $request->input('description'),
+                'image' => $imagePath,
+            ]);
+
+            return redirect()->route('announcements.index')->with("success", 'Inserted Successfully');
+        } else {
+            return redirect()->back()->withInput()->withErrors($request->errors());
+        }
     }
 
     /**
@@ -43,9 +60,13 @@ class AnnouncementController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Announcement $announcement)
+    public function edit(Request $request, $id)
     {
-        //
+
+        $announcement = Announcement::findOrFail($id);
+        $companies = Company::all();
+
+        return view('announcements.edit', compact('announcement', 'companies'));
     }
 
     /**

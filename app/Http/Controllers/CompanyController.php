@@ -42,7 +42,6 @@ class CompanyController extends Controller
 
     public function edit(Request $req, $id)
     {
-
         $company = Company::findOrFail($id);
         return view('companies.edit', compact('company'));
     }
@@ -52,7 +51,7 @@ class CompanyController extends Controller
 
         if ($request->validated()) {
             if ($request->hasFile('logo')) {
-                $imagePath = $request->file('logo')->store('public/images'); 
+                $imagePath = $request->file('logo')->store('public/images');
                 $company->image = $imagePath;
             }
 
