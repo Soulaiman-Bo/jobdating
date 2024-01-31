@@ -9,7 +9,8 @@
                 </div>
             </div>
 
-            <form id="addwikiForm" method="post" action="{{ route('company.store') }}" enctype="multipart/form-data" class="flex-auto p-6">
+            <form id="addwikiForm" method="post" action="{{ route('company.store') }}" enctype="multipart/form-data"
+                class="flex-auto p-6">
                 @csrf
                 <div class="flex flex-wrap -mx-3">
                     <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
@@ -42,10 +43,15 @@
                             <label for="header_img" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700">Header
                                 logo</label>
                             <input type="file" id="logo" name="logo" value="{{ old('logo') }}"
+                                onchange="showFile(event)"
                                 class="focus:shadow-primary-outline text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
                             @if ($errors->has('logo'))
                                 <span id="nameError" class="ml-2 text-red-500">{{ $errors->first('logo') }}</span>
                             @endif
+
+                        </div>
+                        <div class="mb-4">
+                            <img src="" alt="" class=" hidden w-[100px] h-[80px]" id="file-preview" />
                         </div>
                     </div>
 
@@ -88,4 +94,17 @@
 
         </div>
     </div>
+    <script>
+        function showFile(event) {
+            var input = event.target;
+            var reader = new FileReader()
+            reader.onload = function() {
+                var dataUrl = reader.result
+                var output = document.getElementById('file-preview');
+                output.classList.remove("hidden");
+                output.src = dataUrl;
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    </script>
 @endsection
