@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CompanyController;
 use Illuminate\Support\Facades\Route;
@@ -25,6 +26,7 @@ Route::get('/dashboard', function () {
 
 
 Route::resource('company', CompanyController::class)->middleware('auth');
+Route::resource('announcements', AnnouncementController::class)->middleware('auth');
 
 
 Route::middleware('auth')->group(function () {
