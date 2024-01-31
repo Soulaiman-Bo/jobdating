@@ -44,8 +44,9 @@
                 </a>
             </li>
 
-            {{-- <li>
-                <a href="/dashboard/tags"
+
+            <li>
+                <a href="/announcements"
                     class="flex items-center p-2 text-gray-900 rounded-lg hover:bg-gray-100 group">
                     <svg fill="currentColor"
                         class="w-5 h-5 text-gray-500 transition duration-75 group-hover:text-gray-900"
@@ -55,9 +56,9 @@
                         </path>
                     </svg>
 
-                    <span class="ms-3">Tags</span>
+                    <span class="ms-3">Announcement</span>
                 </a>
-            </li> --}}
+            </li>
 
             {{-- <li>
                 <a href="/dashboard/categories"
