@@ -30,6 +30,7 @@ class EditCompanyRequest extends FormRequest
             'location' => 'required|max:255|min:3'
         ];
     }
+    
 
 
     public function messages()
@@ -45,7 +46,7 @@ class EditCompanyRequest extends FormRequest
             'description.min' => 'The description must be at least 3 characters long.',
 
             'logo.max' => 'The logo field must not exceed 2048 bytes.',
-            'logo.image' => 'The logo must be an Imageeee.',
+            // 'logo.image' => 'The logo must be an Imageeee.',
             'logo.mimes' => 'The logo must be one of these formates: jpeg,png,jpg,gif,svg.',
 
             'sector.required' => 'The sector field is required.',
