@@ -15,9 +15,12 @@ class Company extends Model implements HasMedia
         'name',
         'description',
         'sector',
+        'logo',
         'location',
     ];
 
+
+   
 
     public function announcements(){
         return $this->hasMany(Announcement::class);
