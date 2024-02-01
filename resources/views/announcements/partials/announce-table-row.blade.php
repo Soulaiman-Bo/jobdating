@@ -18,7 +18,7 @@
             @method('DELETE')
             <button
                 class="inline-flex items-center py-2 px-3 text-sm font-medium text-center text-white bg-gradient-to-br from-red-400 to-red-600 rounded-lg shadow-md shadow-gray-300 hover:scale-[1.02] transition-transform"
-                type="submit" class="btn btn-danger">
+                type="submit" onclick="return confirm('Are tou sure?')" class="btn btn-danger">
                 <svg class="mr-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd"
