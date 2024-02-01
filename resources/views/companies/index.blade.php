@@ -49,6 +49,7 @@
                             </th>
 
                             <th scope="col" class=" w-1/3 p-4 lg:p-5"></th>
+                            <th scope="col" class=" w-1/3 p-4 lg:p-5">image</th>
 
                         </tr>
                     </thead>
@@ -116,6 +117,7 @@
                                         Update Company</button>
                                     </a>
                                 </td>
+                                <td><img src="{{ $company->getFirstMediaUrl('logos', 'thumbs')}}" / width="120px"></td>
 
                             </tr>
                         @endforeach

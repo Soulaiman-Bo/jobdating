@@ -19,10 +19,21 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
 
+
+
+    // $announcements = Announcement::with(['company' => function ($query) {
+    //     $query->with('logo'); // Eager load company logo
+    // }])->get();
+
     $announcements = Announcement::all();
+
+    // dd($announcements);
+
+
+
     return view('home', ['announcements' => $announcements]);
 
-    
+
 });
 
 Route::get('/dashboard', function () {
