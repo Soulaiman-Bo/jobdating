@@ -29,7 +29,6 @@
 
      <!-- Styles -->
      <style>
-
          /* ! tailwindcss v3.2.4 | MIT License | https://tailwindcss.com */
          *,
          ::after,
@@ -56,8 +55,7 @@
 
          body {
              margin: 0;
-             line-height: inherit
-             font-family: 'Figtree', sans-serif;
+             line-height: inherit font-family: 'Figtree', sans-serif;
 
          }
 
@@ -850,6 +848,7 @@
  </head>
 
  <body class="antialiased">
+
      <div
          class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white">
          @if (Route::has('login'))

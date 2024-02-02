@@ -34,16 +34,19 @@ class AnnouncementController extends Controller
     public function store(StoreAnnouncementRequest $request)
     {
         if ($request->validated()) {
-            $imagePath = $request->file('image')->store('public/images');
+            // $imagePath = $request->file('image')->store('public/images');
 
-            $company = Announcement::create([
+            $announcement = Announcement::create([
                 'title' => $request->input('title'),
                 'company_id' => $request->input('company_id'),
                 'description' => $request->input('description'),
-                'image' => $imagePath,
             ]);
 
-            return redirect()->route('announcements.index')->with("success", 'Inserted Successfully');
+            if ($request->hasFile('image') && $request->file('image')->isValid()) {
+                $announcement->addMediaFromRequest('image')->toMediaCollection('images');
+            }
+
+            return redirect()->route('announcements.index')->with("success", 'Created Successfully');
         } else {
             return redirect()->back()->withInput()->withErrors($request->errors());
         }
@@ -74,7 +77,28 @@ class AnnouncementController extends Controller
      */
     public function update(UpdateAnnouncementRequest $request, Announcement $announcement)
     {
-        //
+        if ($request->validated()) {
+            $announcement->update($request->only([
+                'title',
+                'company_id',
+                'description',
+            ]));
+
+            if ($request->hasFile('image') && $request->file('image')->isValid()) {
+                if ($announcement->logo) {
+                    $announcement->logo->updateMedia([
+                        'media' => $request->file('image'),
+                    ]);
+                } else {
+                    $announcement->addMediaFromRequest('image')->toMediaCollection('images');
+                }
+            }
+
+            session()->flash('success', 'announcement updated successfully!');
+            return redirect()->route('announcements.index', $announcement->id);
+        } else {
+            return redirect()->back()->withInput()->withErrors($request->errors());
+        }
     }
 
     /**
@@ -82,6 +106,9 @@ class AnnouncementController extends Controller
      */
     public function destroy(Announcement $announcement)
     {
-        //
+        $announcement->delete();
+
+        session()->flash('success', 'Announcement deleted successfully!');
+        return redirect()->route('announcements.index');
     }
 }

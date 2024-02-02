@@ -9,7 +9,7 @@
                 </div>
             </div>
 
-            <form id="addwikiForm"action="{{ route('announcements.update', $announcement->id) }}" method="POST"
+            <form id="addwikiForm" action="{{ route('announcements.update', $announcement->id) }}" method="POST"
                 enctype="multipart/form-data" class="flex-auto p-6">
                 @csrf
                 @method('PUT')
@@ -96,7 +96,7 @@
                         style="fill: rgb(255, 255, 255)">
                         <path d="M19 11h-6V5h-2v6H5v2h6v6h2v-6h6z"></path>
                     </svg>
-                    Create New Announcement
+                    Update Announcement
                 </button>
 
             </form>

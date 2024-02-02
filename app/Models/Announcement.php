@@ -5,10 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
-class Announcement extends Model
+class Announcement extends Model implements HasMedia
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, InteractsWithMedia , SoftDeletes;
     protected $fillable = [
         'title',
         'company_id',
@@ -18,6 +21,12 @@ class Announcement extends Model
 
     public function company(){
         return $this->belongsTo(Company::class);
+    }
+
+    public function image()
+    {
+        return $this->hasOne(Media::class, 'model_id')
+                   ->where('collection_name', 'images');
     }
 
 

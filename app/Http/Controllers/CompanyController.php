@@ -34,7 +34,8 @@ class CompanyController extends Controller
                 'location' => $req->input('location'),
             ]);
 
-            if($req->hasFile('logo') && $req->file('logo')->isValid()){
+
+            if ($req->hasFile('logo') && $req->file('logo')->isValid()) {
                 $company->addMediaFromRequest('logo')->toMediaCollection('logos');
             }
 
@@ -54,22 +55,31 @@ class CompanyController extends Controller
 
     public function update(EditCompanyRequest $request, Company $company)
     {
-
         if ($request->validated()) {
-            if ($request->hasFile('logo')) {
-                $imagePath = $request->file('logo')->store('public/images');
-                $company->image = $imagePath;
-            }
+            $company->update($request->only([
+                'name',
+                'description',
+                'sector',
+                'location'
+            ]));
 
-            $company->update($request->all());
+            if ($request->hasFile('logo') && $request->file('logo')->isValid()) {
+                if ($company->logo) {
+                    $company->logo->updateMedia([
+                        'media' => $request->file('logo'),
+                    ]);
+                } else {
+                    $company->addMediaFromRequest('logo')->toMediaCollection('logos');
+                }
+            }
 
             session()->flash('success', 'Company updated successfully!');
             return redirect()->route('company.index', $company->id);
-
         } else {
             return redirect()->back()->withInput()->withErrors($request->errors());
         }
     }
+
 
 
     public function destroy(Company $company)
