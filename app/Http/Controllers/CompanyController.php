@@ -13,7 +13,9 @@ class CompanyController extends Controller
     public function index()
     {
         $companies = Company::all();
-        return view('companies.index', ['companies' => $companies]);
+        $archived = Company::onlyTrashed()->get();
+
+        return view('companies.index', ['companies' => $companies, 'archived' => $archived]);
     }
 
     public function create()
