@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('title', 255)->unique();
             $table->string('description');
             $table->string('image')->nullable();
-            $table->integer('company_id')->nullable();
+            $table->bigInteger('company_id')->unsigned();
             $table->timestamps();
         });
     }

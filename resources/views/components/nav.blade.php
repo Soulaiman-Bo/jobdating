@@ -37,8 +37,7 @@
                         <div class="px-4 py-3">
                             <span class="block text-sm text-gray-900"> Soulaiman
                                 Bouhlal </span>
-                            <span
-                                class="block text-sm  text-gray-500 truncate">soulaima@email.com</span>
+                            <span class="block text-sm  text-gray-500 truncate">soulaima@email.com</span>
                         </div>
                         <ul class="py-2" aria-labelledby="user-menu-button">
                             <li>
@@ -52,9 +51,7 @@
 
 
                             <li>
-                                <a href="/api/logout"
-                                    class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Sign
-                                    out</a>
+                                <x-logout-component />
                             </li>
                         </ul>
                     </div>

@@ -41,8 +41,8 @@ Route::get('/dashboard', function () {
 })->middleware('auth');;
 
 
-Route::resource('company', CompanyController::class)->middleware('auth');
-Route::resource('announcements', AnnouncementController::class)->middleware('auth');
+Route::resource('company', CompanyController::class)->middleware(['auth', 'checkAdmin']);
+Route::resource('announcements', AnnouncementController::class)->middleware(['auth']);
 
 
 Route::middleware('auth')->group(function () {
