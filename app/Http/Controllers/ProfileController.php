@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProfileUpdateRequest;
+use App\Models\Skill;
+use App\Models\User;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,8 +18,21 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
+
+        $userId = Auth::id();
+
+        $existingSkills = User::find($userId)->skills->map(function ($skill) {
+            return ['id' => $skill->id, 'name' => $skill->name];
+        })->toArray();
+
+      
+
+        $skills = Skill::whereNotIn('id', array_column($existingSkills, 'id'))->get();
+
         return view('profile.edit', [
             'user' => $request->user(),
+            'skills' => $skills,
+            'ownskills' => $existingSkills
         ]);
     }
 
@@ -26,6 +41,7 @@ class ProfileController extends Controller
      */
     public function update(ProfileUpdateRequest $request): RedirectResponse
     {
+
         $request->user()->fill($request->validated());
 
         if ($request->user()->isDirty('email')) {
