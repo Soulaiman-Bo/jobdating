@@ -57,18 +57,18 @@
                             @csrf
                             @method('POST')
 
-                            <select class="js-example-basic-multiple w-full" name="tags[]" multiple="multiple">
+                            <select class="js-example-basic-multiple w-full" name="skills[]" multiple="multiple">
                                 @foreach ($skills as $skill)
                                     <option value="{{ $skill->id }}">{{ $skill->name }}</option>
                                 @endforeach
                             </select>
 
-                            @if ($errors->has('tags'))
-                                <span id="tagsError" class="ml-2 text-red-500">{{ $errors->first('tags') }}</span>
+                            @if ($errors->has('skills'))
+                                <span id="tagsError" class="ml-2 text-red-500">{{ $errors->first('skills') }}</span>
                             @endif
 
                             <div class="flex items-center gap-4">
-                                <x-primary-button>{{ __('Add Tags') }}</x-primary-button>
+                                <x-primary-button>{{ __('Add Skills') }}</x-primary-button>
 
 
 
@@ -79,7 +79,7 @@
                 </div>
             </div>
 
-            <div class="p-4sm:p-8 bg-white shadow sm:rounded-lg">
+            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
                 <section>
                     <header>
                         <h2 class="text-lg font-medium mb-9 text-gray-900">

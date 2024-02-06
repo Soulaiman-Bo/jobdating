@@ -144,7 +144,7 @@
             <section>
                 <header>
                     <h2 class="text-lg font-medium mb-9 text-gray-900">
-                        {{ __('Your Skills') }}
+                        {{ __('Required Skills') }}
                     </h2>
                 </header>
             </section>

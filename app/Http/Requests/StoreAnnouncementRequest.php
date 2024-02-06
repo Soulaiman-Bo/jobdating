@@ -26,7 +26,7 @@ class StoreAnnouncementRequest extends FormRequest
             'description' => 'required|min:30',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'company_id' => 'required|integer|max:255',
-            'skills' => 'required|array'
+            // 'skills' => 'required|array'
         ];
     }
 

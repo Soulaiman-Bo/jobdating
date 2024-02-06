@@ -897,6 +897,9 @@
 
                                  <p class="mt-6 font-black text-gray-500">{{ $announce->company->name }}</p>
 
+                                 <p class="mt-6 font-black text-gray-500">Degree of Matching:
+                                    {{ number_format($announce->percentageSharedSkills, 2) }} %</p>
+
                                  <h2 class="mt-6 text-xl font-bold text-gray-900 dark:text-white">
                                      {{ $announce->title }}</h2>
 

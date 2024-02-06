@@ -3,6 +3,7 @@
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\SkillsController;
 use App\Models\Announcement;
 use Illuminate\Support\Facades\Route;
@@ -18,16 +19,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    // $announcements = Announcement::with(['company' => function ($query) {
-    //     $query->with('logo'); // Eager load company logo
-    // }])->get();
-
-    $announcements = Announcement::all();
-
-    // dd($announcements);
-    return view('home', ['announcements' => $announcements]);
-});
+Route::get('/', [HomeController::class, 'index']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
