@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+
     <div class="w-full max-w-full px-3 shrink-0 md:flex-0">
         <div class="relative flex flex-col min-w-0 break-words bg-white border-0 shadow-xl rounded-2xl bg-clip-border">
             <div class="border-black/12.5 rounded-t-2xl border-b-0 border-solid p-6 pb-0">
@@ -88,8 +93,6 @@
                     </div>
                 </div>
 
-
-
                 <button type="submit"
                     class="inline-flex items-center w-fit mb-5 py-2 px-3 text-sm font-medium text-center text-white bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg shadow-md shadow-gray-300 hover:scale-[1.02] transition-transform">
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
@@ -102,6 +105,57 @@
             </form>
 
         </div>
+
+
+        <div class="p-4 sm:p-8 mt-9  bg-white shadow-xl sm:rounded-lg">
+            <div class="max-w-xl">
+                <section>
+                    <header>
+                        <h2 class="text-lg font-medium text-gray-900">
+                            {{ __('Add Skills') }}
+                        </h2>
+                    </header>
+
+                    <form method="post" action="{{ route('announcements.add', [$announcement->id]) }}"
+                        class="mt-6 space-y-6">
+                        @csrf
+                        @method('POST')
+
+                        <select class="js-example-basic-multiple w-full" name="skills[]" multiple="multiple">
+                            @foreach ($skills as $skill)
+                                <option value="{{ $skill->id }}">{{ $skill->name }}</option>
+                            @endforeach
+                        </select>
+
+                        @if ($errors->has('skills'))
+                            <span id="tagsError" class="ml-2 text-red-500">{{ $errors->first('skills') }}</span>
+                        @endif
+
+                        <div class="flex items-center gap-4">
+                            <x-primary-button>{{ __('Add Skills') }}</x-primary-button>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </div>
+
+
+        <div class="p-4 sm:p-8 mt-9 bg-white shadow-xl sm:rounded-lg">
+            <section>
+                <header>
+                    <h2 class="text-lg font-medium mb-9 text-gray-900">
+                        {{ __('Your Skills') }}
+                    </h2>
+                </header>
+            </section>
+            <div class="max-w-full flex flex-wrap ">
+                @foreach ($ownskills as $skill)
+                    <span
+                        class=" mb-3 text-blue-600 text-md font-medium me-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-blue-400 border border-blue-400">{{ $skill['name'] }}</span>
+                @endforeach
+            </div>
+        </div>
+
     </div>
     <script>
         function showFile(event) {
@@ -113,6 +167,19 @@
                 output.src = dataUrl;
             }
             reader.readAsDataURL(input.files[0]);
+        }
+
+
+        $(document).ready(function() {
+            $('.js-example-basic-multiple').select2();
+        });
+
+        let successAlert = document.getElementById("successAlert");
+
+        if (successAlert) {
+            setTimeout(() => {
+                successAlert.classList.add("hidden");
+            }, 3000);
         }
     </script>
 @endsection

@@ -44,7 +44,7 @@
                 </div>
             </div>
 
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+            <div class="p-4 sm:p-8  bg-white shadow sm:rounded-lg">
                 <div class="max-w-xl">
                     <section>
                         <header>
@@ -79,11 +79,11 @@
                 </div>
             </div>
 
-            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+            <div class="p-4sm:p-8 bg-white shadow sm:rounded-lg">
                 <section>
                     <header>
                         <h2 class="text-lg font-medium mb-9 text-gray-900">
-                            {{ __('Your Skills') }}
+                            {{ __('Required Skills') }}
                         </h2>
                     </header>
                 </section>
