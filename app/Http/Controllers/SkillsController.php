@@ -36,10 +36,10 @@ class SkillsController extends Controller
     public function addSkillsToUser(Request $request, $user_id)
     {
         $request->validate([
-            'tags' => ['required', 'array',],
+            'skills' => ['required', 'array',],
         ]);
 
-        $tags = $request->input('tags');
+        $tags = $request->input('skills');
         $user = User::find($user_id);
 
         $existingSkillIds = $user->skills->pluck('id')->toArray();

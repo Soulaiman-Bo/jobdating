@@ -77,7 +77,14 @@ class AnnouncementController extends Controller
         $announcement = Announcement::findOrFail($id);
         $companies = Company::all();
 
-        return view('announcements.edit', compact('announcement', 'companies'));
+        $ownskills = Announcement::find($id)->skills->map(function ($skill) {
+            return ['id' => $skill->id, 'name' => $skill->name];
+        })->toArray();
+
+
+        $skills = Skill::whereNotIn('id', array_column($ownskills, 'id'))->get();
+
+        return view('announcements.edit', compact('announcement', 'companies',  'ownskills', 'skills'));
     }
 
     /**
@@ -118,5 +125,26 @@ class AnnouncementController extends Controller
 
         session()->flash('success', 'Announcement deleted successfully!');
         return redirect()->route('announcements.index');
+    }
+
+    public function addSkillsToAnnouncements(Request $request, $announcement_id)
+    {
+        $request->validate([
+            'skills' => ['required', 'array',],
+        ]);
+
+        $skills = $request->input('skills');
+        $announcement = Announcement::find($announcement_id);
+
+        $existingSkillIds = $announcement->skills->pluck('id')->toArray();
+
+        $newSkills = Skill::whereIn('id', $skills)
+        ->whereNotIn('id', $existingSkillIds)
+        ->get();
+
+        $announcement->skills()->attach($newSkills);
+
+        return redirect()->route('announcements.edit', [$announcement_id])->with("success", 'Skills added successfully');
+
     }
 }

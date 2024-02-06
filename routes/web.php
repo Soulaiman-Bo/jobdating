@@ -36,6 +36,10 @@ Route::get('/dashboard', function () {
 
 Route::resource('company', CompanyController::class)->middleware(['auth', 'checkAdmin']);
 Route::resource('announcements', AnnouncementController::class)->middleware(['auth',  'checkAdmin']);
+Route::post('announcements/{announcement_id}/add', [AnnouncementController::class, 'addSkillsToAnnouncements'])
+            ->middleware(['auth'])
+            ->name('announcements.add');
+
 
 Route::resource('skills', SkillsController::class)->middleware(['auth']);
 Route::post('skills/{user_id}/add', [SkillsController::class, 'addSkillsToUser'])
