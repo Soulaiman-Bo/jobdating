@@ -42,15 +42,12 @@ class SkillsController extends Controller
         $tags = $request->input('tags');
         $user = User::find($user_id);
 
-        // Retrieve existing skill IDs for the user
         $existingSkillIds = $user->skills->pluck('id')->toArray();
 
-        // Filter out already attached skills
         $newSkills = Skill::whereIn('id', $tags)
             ->whereNotIn('id', $existingSkillIds)
             ->get();
 
-        // Attach only the new skills
         $user->skills()->attach($newSkills);
 
         return redirect()->route('profile.edit')->with("success", 'Skills added successfully');

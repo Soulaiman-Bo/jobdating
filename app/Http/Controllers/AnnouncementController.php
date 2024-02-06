@@ -6,7 +6,10 @@ use App\Models\Announcement;
 use App\Http\Requests\StoreAnnouncementRequest;
 use App\Http\Requests\UpdateAnnouncementRequest;
 use App\Models\Company;
+use App\Models\Skill;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AnnouncementController extends Controller
 {
@@ -15,6 +18,8 @@ class AnnouncementController extends Controller
      */
     public function index()
     {
+
+
         $announcements = Announcement::latest()->paginate(10);
         return view('announcements.index', ['announcements' => $announcements]);
     }
@@ -24,8 +29,9 @@ class AnnouncementController extends Controller
      */
     public function create()
     {
+        $skills = Skill::all();
         $companies = Company::all();
-        return view('announcements.create', ['companies' => $companies]);
+        return view('announcements.create', ['companies' => $companies, 'skills' => $skills]);
     }
 
     /**
@@ -34,13 +40,15 @@ class AnnouncementController extends Controller
     public function store(StoreAnnouncementRequest $request)
     {
         if ($request->validated()) {
-            // $imagePath = $request->file('image')->store('public/images');
 
             $announcement = Announcement::create([
                 'title' => $request->input('title'),
                 'company_id' => $request->input('company_id'),
                 'description' => $request->input('description'),
             ]);
+
+            $skills = $request->input('skills');
+            $announcement->skills()->attach($skills);
 
             if ($request->hasFile('image') && $request->file('image')->isValid()) {
                 $announcement->addMediaFromRequest('image')->toMediaCollection('images');

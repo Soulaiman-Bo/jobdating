@@ -26,6 +26,7 @@ class StoreAnnouncementRequest extends FormRequest
             'description' => 'required|min:30',
             'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'company_id' => 'required|integer|max:255',
+            'skills' => 'required|array'
         ];
     }
 
@@ -48,6 +49,8 @@ class StoreAnnouncementRequest extends FormRequest
             'company_id.required' => 'The company field is required.',
             'company_id.max' => 'The company field must not exceed 255 characters.',
             'company_id.number' => 'The company must be Integer.',
+
+            'skills.required' => 'The Skills are required.',
         ];
     }
 }
