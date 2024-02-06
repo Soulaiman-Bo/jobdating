@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+
+
     <div class="w-full max-w-full px-3 shrink-0 md:flex-0">
         <div class="relative flex flex-col min-w-0 break-words bg-white border-0 shadow-xl rounded-2xl bg-clip-border">
             <div class="border-black/12.5 rounded-t-2xl border-b-0 border-solid p-6 pb-0">
@@ -60,18 +66,6 @@
                         </div>
                     </div> --}}
 
-                    {{-- <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
-                        <div class="mb-4">
-                            <label for="header_img" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700">Location
-                                location</label>
-                            <input type="text" id="location" name="location" value="{{ old('location') }}"
-                                class="focus:shadow-primary-outline text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
-                            @if ($errors->has('location'))
-                                <span id="nameError" class="ml-2 text-red-500">{{ $errors->first('location') }}</span>
-                            @endif
-                        </div>
-                    </div> --}}
-
                     <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
                         <div class="mb-4">
                             <label for="header_img"
@@ -105,6 +99,25 @@
                     </div>
                 </div>
 
+                <div class="flex flex-wrap -mx-3">
+                    <div class="w-full max-w-full px-3 shrink-0 md:w-full md:flex-0">
+                        <div class="mb-4 w-full">
+                            <select id="skills" name="skills[]" multiple="multiple" value="{{ old('skills') }}"
+                                class="js-example-basic-multiple focus:shadow-primary-outline dark:bg-slate-850 dark:text-white text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none">
+                                @foreach ($skills as $skill)
+                                    <option value="{{ $skill->id }}"">
+                                        {{ $skill->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @if ($errors->has('skills'))
+                                <span id="skillsError" class="ml-2 text-red-500">{{ $errors->first('skills') }}</span>
+                            @endif
+                        </div>
+                    </div>
+                </div>
+
+
 
 
                 <button type="submit"
@@ -116,11 +129,24 @@
                     Create New Announcement
                 </button>
 
+
             </form>
 
         </div>
     </div>
     <script>
+        $(document).ready(function() {
+            $('.js-example-basic-multiple').select2();
+        });
+
+        let successAlert = document.getElementById("successAlert");
+
+        if (successAlert) {
+            setTimeout(() => {
+                successAlert.classList.add("hidden");
+            }, 3000);
+        }
+
         function showFile(event) {
             var input = event.target;
             var reader = new FileReader()

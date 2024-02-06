@@ -17,6 +17,7 @@ class Announcement extends Model implements HasMedia
         'company_id',
         'description',
         'image',
+        'skills'
     ];
 
     public function company(){
@@ -27,6 +28,11 @@ class Announcement extends Model implements HasMedia
     {
         return $this->hasOne(Media::class, 'model_id')
                    ->where('collection_name', 'images');
+    }
+
+    public function skills()
+    {
+        return $this->belongsToMany(Skill::class);
     }
 
 
