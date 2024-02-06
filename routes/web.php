@@ -3,6 +3,7 @@
 use App\Http\Controllers\AnnouncementController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\CompanyController;
+use App\Http\Controllers\SkillsController;
 use App\Models\Announcement;
 use Illuminate\Support\Facades\Route;
 
@@ -18,9 +19,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-
-
-
     // $announcements = Announcement::with(['company' => function ($query) {
     //     $query->with('logo'); // Eager load company logo
     // }])->get();
@@ -28,12 +26,7 @@ Route::get('/', function () {
     $announcements = Announcement::all();
 
     // dd($announcements);
-
-
-
     return view('home', ['announcements' => $announcements]);
-
-
 });
 
 Route::get('/dashboard', function () {
@@ -44,6 +37,12 @@ Route::get('/dashboard', function () {
 Route::resource('company', CompanyController::class)->middleware(['auth', 'checkAdmin']);
 Route::resource('announcements', AnnouncementController::class)->middleware(['auth',  'checkAdmin']);
 
+Route::resource('skills', SkillsController::class)->middleware(['auth']);
+Route::post('skills/{user_id}/add', [SkillsController::class, 'addSkillsToUser'])
+            ->middleware(['auth'])
+            ->name('skills.add');
+
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -51,5 +50,4 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-require __DIR__.'/auth.php';
-
+require __DIR__ . '/auth.php';
