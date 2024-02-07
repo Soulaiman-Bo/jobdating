@@ -11,7 +11,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class Announcement extends Model implements HasMedia
 {
-    use HasFactory, InteractsWithMedia , SoftDeletes;
+    use HasFactory, InteractsWithMedia, SoftDeletes;
     protected $fillable = [
         'title',
         'company_id',
@@ -20,14 +20,15 @@ class Announcement extends Model implements HasMedia
         'skills'
     ];
 
-    public function company(){
+    public function company()
+    {
         return $this->belongsTo(Company::class);
     }
 
     public function image()
     {
         return $this->hasOne(Media::class, 'model_id')
-                   ->where('collection_name', 'images');
+            ->where('collection_name', 'images');
     }
 
     public function skills()
@@ -35,5 +36,8 @@ class Announcement extends Model implements HasMedia
         return $this->belongsToMany(Skill::class);
     }
 
-
+    public function users()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }
