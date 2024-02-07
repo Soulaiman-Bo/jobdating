@@ -12,7 +12,7 @@
     </td>
 
     <td class=" w-1/3 p-4 text-base font-medium text-gray-900 whitespace-nowrap lg:p-5">
-        {{ $user->roles[0]->name }}
+       {{ $user->roles[0]->name }}
     </td>
 
     <td class="w-1/3 flex gap-2 p-4 space-x-2 whitespace-nowrap lg:p-5">
@@ -30,6 +30,18 @@
                 Delete User
             </button>
         </form>
+
+        <a href="/users/{{ $user->id }}/edit"
+            class="btn inline-flex items-center py-2 px-3 text-sm font-medium text-center text-gray-700 bg-gray-200 rounded-lg hover:bg-gray-300 hover:text-gray-900 hover:scale-[1.02] transition-all">
+            <svg class="mr-2 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <path d="M17.414 2.586a2 2 0 00-2.828 0L7 10.172V13h2.828l7.586-7.586a2 2 0 000-2.828z">
+                </path>
+                <path fill-rule="evenodd"
+                    d="M2 6a2 2 0 012-2h4a1 1 0 010 2H4v10h10v-4a1 1 0 112 0v4a2 2 0 01-2 2H4a2 2 0 01-2-2V6z"
+                    clip-rule="evenodd"></path>
+            </svg>
+            Update User</button>
+        </a>
     </td>
+
 </tr>
->

@@ -1,108 +1,86 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="w-full max-w-full px-3 shrink-0 md:flex-0">
-        <div class="relative flex flex-col min-w-0 break-words bg-white border-0 shadow-xl rounded-2xl bg-clip-border">
-            <div class="border-black/12.5 rounded-t-2xl border-b-0 border-solid p-6 pb-0">
-                <div class="flex items-center">
-                    <p class="mb-0">Create Company</p>
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Profile') }}
+        </h2>
+    </x-slot>
+
+    <div class="py-12">
+        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
+
+            @if (session()->has('success'))
+                <div id="successAlert" class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                    <div class="max-w-xl">
+                        <div class="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+                            role="alert">
+                            <span class="font-medium"> {{ session('success') }}</span>
+                        </div>
+                    </div>
+                </div>
+            @endif
+
+            <div class="p-4 sm:p-8 bg-white shadow sm:rounded-lg">
+                <div class="max-w-xl">
+                    <section>
+                        <header>
+                            <h2 class="text-lg font-medium text-gray-900">
+                                {{ __("User's Role") }}
+                            </h2>
+
+                            <p class="mt-1 text-sm text-gray-600">
+                                {{ __("Update this users's Role.") }}
+                            </p>
+                        </header>
+
+                        <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+                            @csrf
+                            @method('patch')
+
+                            <div>
+                                <select id="roles" name="roles"
+                                    class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+                                    @foreach ($roles as $role)
+                                        <option value="{{ $role->id }}">
+                                            {{ $role->name }}
+                                        </option>
+                                    @endforeach
+                                </select>
+
+                                @if ($errors->has('company_id'))
+                                    <span id="nameError" class="ml-2 text-red-500">{{ $errors->first('company_id') }}</span>
+                                @endif
+                            </div>
+
+                            <div class="flex items-center gap-4">
+                                <x-primary-button>{{ __('Save Role') }}</x-primary-button>
+
+                                @if (session('status') === 'profile-updated')
+                                    <p x-data="{ show: true }" x-show="show" x-transition x-init="setTimeout(() => show = false, 2000)"
+                                        class="text-sm text-gray-600">{{ __('Saved.') }}</p>
+                                @endif
+                            </div>
+                        </form>
+
+
+
+
+                    </section>
                 </div>
             </div>
 
-            <form id="addwikiForm" action="{{ route('company.update', $company->id) }}" method="POST" class="flex-auto p-6">
-
-                @csrf
-                @method('PUT')
-
-                <div class="flex flex-wrap -mx-3">
-                    <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
-                        <div class="mb-4">
-                            <label for="title"
-                                class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700">Name</label>
-                            <input type="text" id="name" name="name" value=" {{ $company->name }}"
-                                class="focus:shadow-primary-outline text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
-                            @if ($errors->has('name'))
-                                <span id="nameError" class="ml-2 text-red-500">{{ $errors->first('name') }}</span>
-                            @endif
-                        </div>
-                    </div>
-
-                    <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
-                        <div class="mb-4">
-                            <label for="title"
-                                class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700">Description</label>
-                            <input type="text" id="description" name="description" value=" {{ $company->description }}"
-                                class="focus:shadow-primary-outline text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
-                            @if ($errors->has('description'))
-                                <span id="nameError" class="ml-2 text-red-500">{{ $errors->first('description') }}</span>
-                            @endif
-                        </div>
-                    </div>
-
-                    <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
-                        <div class="mb-4">
-                            <label for="header_img" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700">Header
-                                logo</label>
-                            <input type="file" id="logo" value="{{ $company->getFirstMediaUrl('logos', 'thumbs') }}" name="logo" onchange="showFile(event)"
-                                class="focus:shadow-primary-outline text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
-                            @if ($errors->has('logo'))
-                                <span id="nameError" class="ml-2 text-red-500">{{ $errors->first('logo') }}</span>
-                            @endif
-                        </div>
-                        <div class="mb-4">
-                            <img src="{{ $company->getFirstMediaUrl('logos', 'thumbs') }}" alt="" class="w-[100px] h-[80px]" id="file-preview" />
-                        </div>
-                    </div>
-
-                    <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
-                        <div class="mb-4">
-                            <label for="header_img" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700">Sector
-                                sector</label>
-                            <input type="text" id="sector" name="sector" value="{{ $company->sector }}"
-                                class="focus:shadow-primary-outline text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
-                            @if ($errors->has('sector'))
-                                <span id="nameError" class="ml-2 text-red-500">{{ $errors->first('sector') }}</span>
-                            @endif
-                        </div>
-                    </div>
-
-                    <div class="w-full max-w-full px-3 shrink-0 md:w-6/12 md:flex-0">
-                        <div class="mb-4">
-                            <label for="header_img" class="inline-block mb-2 ml-1 font-bold text-xs text-slate-700">Location
-                                location</label>
-                            <input type="text" id="location" name="location" value=" {{ $company->location }}"
-                                class="focus:shadow-primary-outline text-sm leading-5.6 ease block w-full appearance-none rounded-lg border border-solid border-gray-300 bg-white bg-clip-padding px-3 py-2 font-normal text-gray-700 outline-none transition-all placeholder:text-gray-500 focus:border-blue-500 focus:outline-none" />
-                            @if ($errors->has('location'))
-                                <span id="nameError" class="ml-2 text-red-500">{{ $errors->first('location') }}</span>
-                            @endif
-                        </div>
-                    </div>
-
-                </div>
-
-                <button type="submit"
-                    class="inline-flex items-center w-fit mb-5 py-2 px-3 text-sm font-medium text-center text-white bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg shadow-md shadow-gray-300 hover:scale-[1.02] transition-transform">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24"
-                        style="fill: rgb(255, 255, 255)">
-                        <path d="M19 11h-6V5h-2v6H5v2h6v6h2v-6h6z"></path>
-                    </svg>
-                    Create New Company
-                </button>
-
-            </form>
 
         </div>
     </div>
+
     <script>
-        function showFile(event) {
-            var input = event.target;
-            var reader = new FileReader()
-            reader.onload = function() {
-                var dataUrl = reader.result
-                var output = document.getElementById('file-preview');
-                output.src = dataUrl;
-            }
-            reader.readAsDataURL(input.files[0]);
+        let successAlert = document.getElementById("successAlert");
+
+        if (successAlert) {
+            setTimeout(() => {
+                successAlert.classList.add("hidden");
+            }, 3000);
         }
     </script>
 @endsection
