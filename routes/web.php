@@ -21,9 +21,9 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home.index');;
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware('auth');;
+Route::get('/dashboard', function () {return view('dashboard');})->middleware('auth');
+
+
 
 
 Route::resource('company', CompanyController::class)->middleware(['auth', 'checkAdmin']);
@@ -34,6 +34,8 @@ Route::post('announcements/{announcement_id}/add', [AnnouncementController::clas
 Route::post('announcements/apply', [AnnouncementController::class, 'appltForAnnouncements'])
     ->middleware(['auth'])
     ->name('announcements.apply');
+Route::get('/applications',  [AnnouncementController::class, 'getApplications'])->name('announcements.applications');
+
 
 
 Route::resource('skills', SkillsController::class)->middleware(['auth']);

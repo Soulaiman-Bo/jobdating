@@ -165,9 +165,6 @@ class AnnouncementController extends Controller
             return redirect()->route('announcements.edit', [$announcement_id])->with("error", 'You have already applied for this announcement');
         }
 
-        // Apply for the announcement
-        // $user->announcements()->attach($announcement_id);
-
         DB::table('announcement_user')->insert([
             'user_id' => $user->id,
             'announcement_id' => $announcement_id,
@@ -176,5 +173,34 @@ class AnnouncementController extends Controller
         ]);
 
         return redirect()->route('home.index', [$announcement_id])->with("success", 'Successfully applied for the announcement');
+    }
+
+    public function getApplications(Request $request)
+    {
+
+        if (auth()->check() && auth()->user()->hasRole('admin')) {
+
+            $applications = DB::table('announcement_user')
+                ->join('announcements', 'announcement_user.announcement_id', '=', 'announcements.id')
+                ->join('users', 'announcement_user.user_id', '=', 'users.id')
+                ->select('announcements.title as announcement_title', 'users.name as user_name')
+                ->get();
+
+            return view('applications.index', ['applications' => $applications]);
+        } else {
+
+            $userId = Auth::id();
+
+            $applications = DB::table('announcement_user')
+                ->join('announcements', 'announcement_user.announcement_id', '=', 'announcements.id')
+                ->join('users', 'announcement_user.user_id', '=', 'users.id')
+                ->where('users.id', $userId)
+                ->select('announcements.title as announcement_title',  'users.name as user_name')
+                ->get();
+                
+                // dd($applications->items);
+
+            return view('applications.index', ['applications' => $applications]);
+        }
     }
 }
