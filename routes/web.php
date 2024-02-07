@@ -26,7 +26,9 @@ Route::get('/dashboard', function () {return view('dashboard');})->middleware('a
 
 
 Route::resource('/users', UserController::class)->middleware(['auth']);
-
+Route::post('users/{user_id}/changerole', [UserController::class, 'changeRole'])
+    ->middleware(['auth'])
+    ->name('users.changerole');
 
 
 Route::resource('company', CompanyController::class)->middleware(['auth', 'checkAdmin']);

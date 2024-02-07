@@ -34,12 +34,12 @@
                             </p>
                         </header>
 
-                        <form method="post" action="{{ route('profile.update') }}" class="mt-6 space-y-6">
+                        <form method="post" action="{{ route('users.changerole', $user->id) }}" class="mt-6 space-y-6">
                             @csrf
-                            @method('patch')
+                            @method('post')
 
                             <div>
-                                <select id="roles" name="roles"
+                                <select id="role_id" name="role_id"
                                     class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
                                     @foreach ($roles as $role)
                                         <option value="{{ $role->id }}">
