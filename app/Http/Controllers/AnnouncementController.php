@@ -10,6 +10,7 @@ use App\Models\Skill;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AnnouncementController extends Controller
 {
@@ -18,8 +19,6 @@ class AnnouncementController extends Controller
      */
     public function index()
     {
-
-
         $announcements = Announcement::latest()->paginate(10);
         return view('announcements.index', ['announcements' => $announcements]);
     }
@@ -139,12 +138,43 @@ class AnnouncementController extends Controller
         $existingSkillIds = $announcement->skills->pluck('id')->toArray();
 
         $newSkills = Skill::whereIn('id', $skills)
-        ->whereNotIn('id', $existingSkillIds)
-        ->get();
+            ->whereNotIn('id', $existingSkillIds)
+            ->get();
 
         $announcement->skills()->attach($newSkills);
 
         return redirect()->route('announcements.edit', [$announcement_id])->with("success", 'Skills added successfully');
+    }
 
+
+    public function appltForAnnouncements(Request $request)
+    {
+        $request->validate([
+            'announce_id' => ['required', 'numeric'],
+        ]);
+
+        $announcement_id = $request->announce_id;
+        $user = auth()->user();
+
+        $existingApplication = DB::table('announcement_user')
+            ->where('user_id', $user->id)
+            ->where('announcement_id', $announcement_id)
+            ->exists();
+
+        if ($existingApplication) {
+            return redirect()->route('announcements.edit', [$announcement_id])->with("error", 'You have already applied for this announcement');
+        }
+
+        // Apply for the announcement
+        // $user->announcements()->attach($announcement_id);
+
+        DB::table('announcement_user')->insert([
+            'user_id' => $user->id,
+            'announcement_id' => $announcement_id,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        return redirect()->route('home.index', [$announcement_id])->with("success", 'Successfully applied for the announcement');
     }
 }

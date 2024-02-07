@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class, 'index']);
+Route::get('/', [HomeController::class, 'index'])->name('home.index');;
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -29,14 +29,17 @@ Route::get('/dashboard', function () {
 Route::resource('company', CompanyController::class)->middleware(['auth', 'checkAdmin']);
 Route::resource('announcements', AnnouncementController::class)->middleware(['auth',  'checkAdmin']);
 Route::post('announcements/{announcement_id}/add', [AnnouncementController::class, 'addSkillsToAnnouncements'])
-            ->middleware(['auth'])
-            ->name('announcements.add');
+    ->middleware(['auth'])
+    ->name('announcements.add');
+Route::post('announcements/apply', [AnnouncementController::class, 'appltForAnnouncements'])
+    ->middleware(['auth'])
+    ->name('announcements.apply');
 
 
 Route::resource('skills', SkillsController::class)->middleware(['auth']);
 Route::post('skills/{user_id}/add', [SkillsController::class, 'addSkillsToUser'])
-            ->middleware(['auth'])
-            ->name('skills.add');
+    ->middleware(['auth'])
+    ->name('skills.add');
 
 
 
